@@ -50,17 +50,25 @@
 
 <p>Since I build the website locally, I wrote a pre-commit hook for the Jekyll repository that takes care of building and updating the site repository on both Gihub and the server. Here’s what it does:</p>
 
-<p>1) It builds the site using:
-    jekyll build -d ~/projects/web-ifThermal-site
-2) It then pushs the new site build to github.
-    NOW=$(date +”%H:%M-%b-%d-%Y”)
-    git add -A
-    git commit -m “Site build - ${NOW}”
-    git push origin master
-3) Lastly, It uses <a href="http://sshpass.sourceforge.net">sshpass</a> and ssh to do a git pull on the server’s site repository. 
-    source $HOME/ifthermal.cfg
-    cmd=”cd $HOME/projects/web-ifThermal-site; git pull;  exit;”
-    sshpass -p$password ssh ${sshuser}@${domain} $cmd</p>
+<p>1) It builds the site using:</p>
+
+<pre><code>jekyll build -d ~/projects/web-ifThermal-site
+</code></pre>
+
+<p>2) It then pushs the new site build to github.</p>
+
+<pre><code>NOW=$(date +"%H:%M-%b-%d-%Y")
+git add -A
+git commit -m "Site build - ${NOW}"
+git push origin master
+</code></pre>
+
+<p>3) Lastly, It uses <a href="http://sshpass.sourceforge.net">sshpass</a> and ssh to do a git pull on the server’s site repository. </p>
+
+<pre><code>source $HOME/ifthermal.cfg
+cmd="cd $HOME/projects/web-ifThermal-site; git pull;  exit;"
+sshpass -p$password ssh ${sshuser}@${domain} $cmd
+</code></pre>
 
 <p>Now, in step three you may have noticed my use of source to collect sensitive information from a configuration file. It seems to be a debatable issue on best practices for calling secure information from a script. However, this file will be relativley safe on my machine so I’ll leave it that. If this solution rubs you the wrong way and you have a better solution PLEASE contact me. To be clear, the config file looks like this:
     #!/bin/bash
