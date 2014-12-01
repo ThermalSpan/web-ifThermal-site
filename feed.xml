@@ -6,8 +6,8 @@
 </description>
     <link>http://www.ifthermal.com/</link>
     <atom:link href="http://www.ifthermal.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 30 Nov 2014 23:11:53 -0500</pubDate>
-    <lastBuildDate>Sun, 30 Nov 2014 23:11:53 -0500</lastBuildDate>
+    <pubDate>Mon, 01 Dec 2014 00:05:32 -0500</pubDate>
+    <lastBuildDate>Mon, 01 Dec 2014 00:05:32 -0500</lastBuildDate>
     <generator>Jekyll v2.5.2</generator>
     
       <item>
@@ -37,6 +37,9 @@ password=12345
 &lt;p&gt;Then on a pre-push commit I run the following:&lt;/p&gt;
 
 &lt;p&gt;However, this approach was not ideal since it required copying the entire directory over every time. What a was&lt;/p&gt;
+
+&lt;p&gt;rm -r -f public_html
+ln -s -f -T  ~/projects/web-ifThermal-site ~/public_html&lt;/p&gt;
 
 &lt;p&gt;If you check out the script on github you may have noticed my extensive use of the the printf. For personal scripts I make extensive use of printf becuase it allows me to color and formate text better than echo. I like to use print statements like comments since they need to provide readibility to the code, and understandability for any errors that occur during the running of the script.  &lt;/p&gt;
 
