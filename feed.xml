@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Your awesome title</title>
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</description>
+    <link>http://www.ifthermal.com/</link>
+    <atom:link href="http://www.ifthermal.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 30 Nov 2014 23:11:53 -0500</pubDate>
+    <lastBuildDate>Sun, 30 Nov 2014 23:11:53 -0500</lastBuildDate>
+    <generator>Jekyll v2.5.2</generator>
+    
+      <item>
+        <title>Website Setup</title>
+        <description>&lt;h1 id=&quot;website-setup&quot;&gt;Website Setup&lt;/h1&gt;
+
+&lt;p&gt;Building this website presented a nice sequence of challenges for me. First, I have very little experience with the &lt;em&gt;html&lt;/em&gt; and &lt;em&gt;css&lt;/em&gt; combo. Secondly, I had to learn about stic site generators. Lastly I had to figure out a suitable setup for version control and pushing updates to bluehost server I use. &lt;/p&gt;
+
+&lt;p&gt;Webdesign presents me wih several challenges. The most prominent is that i’m not a designer. To overcome this challenge I decided to stick with simplicity. So, aside from the masking gimmick in the header I chose to implement a simple black and white theme. All the content lives in a single column. I tried to keep the extra fluff to a minimum. Expect more formatting and design updates as I gather feedback.&lt;/p&gt;
+
+&lt;p&gt;After I had a rough &lt;a href=&quot;https://github.com/ThermalSpan/web-experiments&quot;&gt;prototype&lt;/a&gt; that showcased the look I was going for it was time to learn about static site generation. I chose a static site becuase I found the other option to be overwhelming. The operation of a program that uses some markup to produce a complete directory of html files makes good sense to me. In addition it seems like a good idea to get familiar with jekyll since that was the system of choice for github. Couldn’t be simpler to get it running, just follow the diretions on their &lt;a href=&quot;http://jekyllrb.com&quot;&gt;website&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;For a couple hours I found Jekyll’s serve command to be of great utility. However I quickly made the switch to pushing the changes to my &lt;a href=&quot;http://www.bluehost.com&quot;&gt;bluehost&lt;/a&gt; server. First couple of tries I used ftp to copy the _site directory over to the public_html directory, and viola, a working website!. However, this is not sustainable so I had to find a suitable way to automate the process.  &lt;/p&gt;
+
+&lt;p&gt;I keep the jekyll project for my website under version control, the repository is publically available on my github. Using a git hook seemed to be the way to go as far as automating the transfer of files to the server. So i wrote a pre-push hook in bash that would use &lt;em&gt;scp&lt;/em&gt; to copy the _site directory to the server. The script then used &lt;em&gt;sshpass&lt;/em&gt; and &lt;em&gt;ssh&lt;/em&gt; to delete the old site and move the new version.&lt;/p&gt;
+
+&lt;p&gt;Note, that I decided to use a config file to store the information about username and passwords for ssh access. While this is not the most secure option, the config file should be relativley safe on my machine. Please contact me if this solution rubs you wrong and you know of a better option. &lt;/p&gt;
+
+&lt;p&gt;Just to be clear, the config file looks like this:
+&lt;code&gt;bash
+#!/bin/bash
+sshuser=user
+domain=example.com
+password=12345
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Then on a pre-push commit I run the following:&lt;/p&gt;
+
+&lt;p&gt;However, this approach was not ideal since it required copying the entire directory over every time. What a was&lt;/p&gt;
+
+&lt;p&gt;If you check out the script on github you may have noticed my extensive use of the the printf. For personal scripts I make extensive use of printf becuase it allows me to color and formate text better than echo. I like to use print statements like comments since they need to provide readibility to the code, and understandability for any errors that occur during the running of the script.  &lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 29 Nov 2014 00:00:00 -0500</pubDate>
+        <link>http://www.ifthermal.com/2014/11/29/Website-Setup.html</link>
+        <guid isPermaLink="true">http://www.ifthermal.com/2014/11/29/Website-Setup.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 26 Nov 2014 09:20:41 -0500</pubDate>
+        <link>http://www.ifthermal.com/jekyll/update/2014/11/26/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://www.ifthermal.com/jekyll/update/2014/11/26/welcome-to-jekyll.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Hello World!</title>
+        <description>&lt;h1 id=&quot;hello-world&quot;&gt;Hello World!&lt;/h1&gt;
+
+&lt;p&gt;This is a reboot of my old website. I have switched from a worpress site to a simple static site built with &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This website marks a turning point in my programming adventure. I feel ready to put myself out there. Make a name. All that jazz. Here are some reasons explaing why I made this website. &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Branding. I’m under the impression that a nice website with respectable client is more powerful than a simple resume. &lt;/li&gt;
+  &lt;li&gt;Output. Having a venue to share my work gives me the motivation to do it right and follow through. &lt;/li&gt;
+  &lt;li&gt;Work. This website gives a concrete foundation to built upon.&lt;/li&gt;
+  &lt;li&gt;Every one else. I have learned an absurd amount from the website of inspired individuals. I can only hope that I will add value to many online communities through my efforts here. &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So here it is! Welcome to &lt;em&gt;if(Thermal)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.ifthermal.com/images/demopicture.jpg&quot; alt=&quot;demopicture&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 26 Nov 2014 00:00:00 -0500</pubDate>
+        <link>http://www.ifthermal.com/2014/11/26/Hello-World.html</link>
+        <guid isPermaLink="true">http://www.ifthermal.com/2014/11/26/Hello-World.html</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

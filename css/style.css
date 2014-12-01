@@ -1,0 +1,133 @@
+html { 
+  background: #000000 url(http://www.ifthermal.com/images/nebula2.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+    color: #242729;
+  font-family: Times-Bold, Serif;
+
+}
+
+li {
+    display: list-item;
+}
+
+ul {
+    list-style-type: none;
+}
+
+
+#logo {
+    width: 102%;
+    max-width: 102%;
+    margin-left: -1%; 
+    margin-bottom: 0%;
+    padding: 0px 0px 0px 0px;
+    height: auto;
+    vertical-align: middle;
+    display: block;
+}
+
+#header-filler {
+    height: 450px;
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+}
+
+#menu {
+    overflow: hidden;
+    margin: 0px auto;
+}
+
+#menu ul {
+    margin: 10px auto;
+    padding: 10px;
+    width: 50%;
+    border-top: 3px solid #ffffff;
+    border-bottom: 3px solid #ffffff;
+    border-radius: 10px;
+}
+
+#menu li {
+    display: inline-block;
+    border-right: 1px solid #ffffff;
+
+}
+
+#menu a {
+    display: block;
+    padding: 0px 20px 0px 20px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 25px;
+    font-weight:400;
+    color: #ffffff;
+    border: none;
+}
+
+.dark-div {
+    background: #242729;
+    text-align: center;
+    height: auto;
+    color: #ffffff;
+}
+
+#about h1 {
+    position: relative;
+    padding-bottom: 10px;
+    top: 24px;
+    right: 0;
+    left: 0;
+}
+
+#about img {
+    max-width: 20%;
+}
+
+#about p {
+    width: 30%;
+    margin: 0% auto;
+    padding-bottom: 10px;
+}
+
+.home{
+    width: 40%;
+    margin: auto;
+
+}
+
+.full-div {
+    width: 100%;
+    margin-left: -1%;
+    margin-top: 0%;
+    width: 102%;
+    text-align: center;
+    padding: 0px 0px 0px 0px;
+    background-color: #ffffff;
+}
+
+#post-list {
+    width: 400px;
+    margin: 0 auto;
+    text-align: left;
+
+}
+
+#post {
+width: 800px;
+margin: 0 auto;
+text-align: left;
+}
+
+#post h1 {
+    text-align: center;
+}
+
+#post ul{
+     width: 650px;
+     margin: 0 auto;
+     list-style-type: circle;
+
+}
