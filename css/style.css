@@ -116,7 +116,9 @@ ul {
 }
 
 #post {
-width: 800px;
+font-family: Times;
+font-weight: normal;
+width: 650px;
 margin: 0 auto;
 text-align: left;
 }
