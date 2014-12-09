@@ -118,6 +118,8 @@ ul {
 #post {
 font-family: Times;
 font-weight: normal;
+font-size: 18px;
+line-height: 170%;
 width: 650px;
 margin: 0 auto;
 text-align: left;
@@ -132,4 +134,9 @@ text-align: left;
      margin: 0 auto;
      list-style-type: circle;
 
+}
+
+.icon-list li {
+    display: inline;
+    padding-right: 20px;
 }
