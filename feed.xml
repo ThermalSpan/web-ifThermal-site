@@ -6,15 +6,15 @@
 </description>
     <link>http://www.ifthermal.com/</link>
     <atom:link href="http://www.ifthermal.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Dec 2014 17:28:51 -0500</pubDate>
-    <lastBuildDate>Tue, 09 Dec 2014 17:28:51 -0500</lastBuildDate>
+    <pubDate>Tue, 09 Dec 2014 17:37:24 -0500</pubDate>
+    <lastBuildDate>Tue, 09 Dec 2014 17:37:24 -0500</lastBuildDate>
     <generator>Jekyll v2.5.2</generator>
     
       <item>
         <title>Website Setup</title>
         <description>&lt;h1 id=&quot;website-setup&quot;&gt;Website Setup&lt;/h1&gt;
 
-&lt;p&gt;Building this website presented a nice sequence of challenges for me. First, I have very little experience with the &lt;em&gt;html&lt;/em&gt; and &lt;em&gt;css&lt;/em&gt; combo. Secondly, I had to learn about stic site generators. Lastly I had to figure out a suitable setup for version control and pushing updates to the bluehost server I use. &lt;/p&gt;
+&lt;p&gt;Building this website presented a nice sequence of challenges for me. First, I still need to gain experience with the &lt;em&gt;html&lt;/em&gt; and &lt;em&gt;css&lt;/em&gt; combo. Secondly, I had to learn about stic site generators. Lastly I had to figure out a suitable setup for version control and pushing updates to the bluehost server I use. &lt;/p&gt;
 
 &lt;p&gt;Webdesign presents me with several challenges. The most prominent is that i’m not a designer. To overcome this challenge I decided to stick with simplicity. So, aside from the masking gimmick in the header I chose to implement a simple black and white theme. All the content lives in a single column. I tried to keep the extra fluff to a minimum. Expect more formatting and design updates as I gather feedback.&lt;/p&gt;
 
