@@ -142,7 +142,7 @@ text-align: left;
 }
 
 #braceform {
-    font-height: 30px;
+    font-size: 25px;
 }
 
 #braceform label {
@@ -153,5 +153,5 @@ text-align: left;
 
 #braceform input {
     display: inline-block;
-    font-size: 25px;
+    font-size: 20px;
 }
