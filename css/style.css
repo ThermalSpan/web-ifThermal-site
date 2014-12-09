@@ -142,5 +142,14 @@ text-align: left;
 }
 
 #braceform {
-    font-height: 25px;
+    font-height: 30px;
+}
+
+#braceform label {
+    display: inline-block;
+    width: 200px;
+}
+
+#braceform input {
+    display: inline-block;
 }
