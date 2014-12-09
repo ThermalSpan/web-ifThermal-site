@@ -140,3 +140,7 @@ text-align: left;
     display: inline;
     padding-right: 20px;
 }
+
+#braceform {
+    font-height: 25px;
+}
