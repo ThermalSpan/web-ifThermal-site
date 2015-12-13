@@ -4,7 +4,8 @@ Menu menu;
 Selector selector;
 Point nearestNeighbor;
 ArrayList<Point> pointList, selectedList;
-boolean drawCon, drawHelp, drawTreeRelations, drawTreeBoundaries, drawGnoman, useSelector;
+ArrayList<BoundingBox> boxList;
+boolean drawCon, drawHelp, drawTreeRelations, drawTreeBoundaries, drawGnoman, useSelector, drawBoxes;
 
 void setup() {
   size(1000,1000);
@@ -17,12 +18,14 @@ void setup() {
   menu = new Menu();
   pointList = new ArrayList<Point>();
   selectedList = new ArrayList<Point>();
+  boxList = new ArrayList <BoundingBox>();
 
   drawCon = false;
   drawHelp = false;
   drawGnoman = true;
   drawTreeRelations = false;
-  drawTreeBoundaries = true;
+  drawTreeBoundaries = false;
+  drawBoxes = false;
   
 }
 
@@ -32,6 +35,12 @@ void draw() {
   pushMatrix();
     cam.update();
     if(drawGnoman) GnomanDraw(200);
+
+    if(drawBoxes) {
+      for(BoundingBox bb: boxList) {
+        bb.draw();
+      }
+    }
     
     if(drawTreeBoundaries) {
       pot.drawBoundaries();
@@ -50,11 +59,12 @@ void draw() {
     selector.draw();
   }
 
-  if (drawHelp) {
+  /*if (drawHelp) {
     drawHelpMenu();
   } else {
     menu.draw();
-  }
+  }*/
+  menu.draw();
 
 }
 
@@ -64,6 +74,7 @@ void keyPressed() {
     case 'C':
       pointList.clear();
       selectedList.clear();
+      boxList.clear();
       pot.clearTree();
       break;
     case 'h':
@@ -77,6 +88,10 @@ void keyPressed() {
     case 'j':
     case 'J':
       drawTreeBoundaries = !drawTreeBoundaries;
+      break;
+    case 'l':
+    case 'L':
+      drawBoxes = !drawBoxes;
       break;
     case 'e':
     case 'E':
@@ -94,6 +109,10 @@ void keyPressed() {
 }
 
 void checkSelect() {}
+
+void addBox(BoundingBox bb) {
+  boxList.add(bb);
+}
 
 void setSelected(ArrayList<Point> pointList) {
   for(Point p: selectedList) {
@@ -161,11 +180,9 @@ void mouseReleased() {
   }
 }
 
-void balanceTree (ArrayList<Point> points, boolean dir) {
-
-}
 class BoundingBox {
   float x1, x2, y1, y2;
+  color _c;
   public BoundingBox(float _x1, float _x2, float _y1, float _y2)
   {
     x1 = _x1;
@@ -173,14 +190,16 @@ class BoundingBox {
     y1 = _y1;
     y2 = _y2;
   }
+
+  void setColor (color c) {
+    _c = c;
+  }
   void draw()
   {
     pushStyle();
     stroke(0);
-    line(x1, y1, x2, y1); 
-    line(x1, y2, x2, y2);
-    line(x1, y1, x1, y2);
-    line(x2, y1, x2, y2);
+    fill(_c);
+    rect(x1, y1, x2 - x1,y2 - y1);
     popStyle();
   }
 }
@@ -418,10 +437,10 @@ class Menu{
     _buttonList.add(pan);
     pan.addHandler(new PanHandler());
     
-    Button rot = new Button (0, y, "Rotate");
-    y += i_buttonHeight + 10;
-    _buttonList.add(rot);
-    rot.addHandler(new RotHandler());
+    //Button rot = new Button (0, y, "Rotate");
+    //y += i_buttonHeight + 10;
+    //_buttonList.add(rot);
+    //rot.addHandler(new RotHandler());
  
     Button place = new Button (0, y, "Place");
     y += i_buttonHeight + 10;
@@ -582,6 +601,7 @@ class Selector{
   void mousePressed(){//triggered on mousePressed()
   _startX = mouseX;
   _startY = mouseY;  
+  boxList.clear();
   switch(_select_mode){
    case 0:  _selecting = true; //rectangular selection
             break;  
@@ -734,6 +754,7 @@ class KdTree {
     _relationC = colorizeRelation(depth);
     _left = null;
     _right = null;
+    _bb.setColor (colorizeBox(depth));
 
     calcBoundary();    
   }
@@ -802,15 +823,19 @@ class KdTree {
       leftRes = merge(leftRes, _left.report());    
     if(_right != null)
       rightRes = _right.report();
+
+    addBox (_bb);
+
     return merge(rightRes, leftRes);
   }
   
   ArrayList<Point> queryBox(BoundingBox range) {
     ArrayList<Point> rightRes = new ArrayList<Point>();
     ArrayList<Point> leftRes = new ArrayList<Point>();
-    
-    if(inBox(_loc, range)) 
-      rightRes.add(_loc);      
+    addBox(_bb); 
+    if(inBox(_loc, range)) {
+      rightRes.add(_loc);   
+    }   
     
     if(_left != null) {
       if(containsBox(range, _left._bb)) 
@@ -833,7 +858,7 @@ class KdTree {
   ArrayList<Point> queryCircle(Point c, float r) {
     ArrayList<Point> rightRes = new ArrayList<Point>();
     ArrayList<Point> leftRes = new ArrayList<Point>();
-    
+    addBox(_bb); 
     if(inCircle(c, r, _loc)) 
       rightRes.add(_loc);      
     
@@ -944,6 +969,15 @@ class KdTree {
   color colorizeBoundary (int depth) {
     float d = depth * 0.2;
     return color((int)255*abs(sin(d + 0.3)), (int)255*abs(sin(d+3.0)), (int)255*abs(sin(d+0.7))); 
+  }
+
+  color colorizeBox (int depth) {
+    float d = depth* 0.2;
+    int alpha = 0;
+    if (depth != 0) {
+      alpha = 20;
+    }
+    return color((int)255*abs(sin(5*d+0.3)), (int)255*abs(cos(3.1*d+2.0)), (int)255*abs(sin(20* d+0.7)), alpha);
   }
 }
 class TreeContainer {

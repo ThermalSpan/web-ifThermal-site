@@ -44,6 +44,28 @@ function getProcessingSketchId () { return 'RangeApp'; }
 	</head>
 	<body>
 		<div id="content">
+            <div id = "words">
+            <h1>RangeApp</h1>
+            <h3>Explanation</h3>
+            <p> This processing sketch was built as a project for "Introduction to Computational Geometry." It demonstrates the use of a kd-tree in performing a range search. The user can place place points and select points using rectangle or cicle ranges. There are also a variety of extra visual effects available to demonstrate how the tree works. </p>
+            <h3>Controls</h3>
+            <ul> 
+                <li> j - Toggle drawing subtree boundaries.</li>
+                <li> k - Toggle drawing tree relations. </li>
+                <li> l - Toggle drawing of tree regions explored during selection. (Except the root, that would be the whole thing.)</li>
+                <li> e - Toggle drawing of gnoman. </li>
+                <li> r - Add one random point </li>
+                <li> t - Add twenty random points. </li>
+                <li> c - Clear points and tree. </li>
+                <li> Right click drag for zoom. </li>
+            </ul>
+            <h3>Contributors</h3>
+            <ul>
+                <li> Lynn Asselin </li>
+                <li> Kevin Pratt </li>
+                <li> Russell Bentkey </li>
+            </ul>
+            </div>
 			<div>
 				<canvas id="RangeApp" data-processing-sources="RangeApp.pde" 
 						width="1000" height="1000">
@@ -54,9 +76,6 @@ function getProcessingSketchId () { return 'RangeApp'; }
 					<p>JavaScript is required to view the contents of this page.</p>
 				</noscript>
 	    	</div>
-			<h1>RangeApp</h1>
-    		<p id="description"></p>
-			<p id="sources">Source code: <a href="RangeApp.pde">RangeApp</a> </p>
 			<p>
 			Built with <a href="http://processing.org" title="Processing">Processing</a>
 			and <a href="http://processingjs.org" title="Processing.js">Processing.js</a>
