@@ -6,15 +6,15 @@
 </description>
     <link>http://www.ifthermal.com/</link>
     <atom:link href="http://www.ifthermal.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Dec 2014 17:50:57 -0500</pubDate>
-    <lastBuildDate>Tue, 09 Dec 2014 17:50:57 -0500</lastBuildDate>
-    <generator>Jekyll v2.5.2</generator>
+    <pubDate>Sun, 13 Dec 2015 11:54:10 -0500</pubDate>
+    <lastBuildDate>Sun, 13 Dec 2015 11:54:10 -0500</lastBuildDate>
+    <generator>Jekyll v3.0.1</generator>
     
       <item>
         <title>Website Setup</title>
         <description>&lt;h1 id=&quot;website-setup&quot;&gt;Website Setup&lt;/h1&gt;
 
-&lt;p&gt;Building this website presented a nice sequence of challenges for me. First, I still need to gain experience with the &lt;em&gt;html&lt;/em&gt; and &lt;em&gt;css&lt;/em&gt; combo. Secondly, I had to learn about stic site generators. Lastly I had to figure out a suitable setup for version control and pushing updates to the bluehost server I use. &lt;/p&gt;
+&lt;p&gt;Building this website presented a nice sequence of challenges for me. First, I still need to gain experience with the &lt;em&gt;html&lt;/em&gt; and &lt;em&gt;css&lt;/em&gt; combo. Secondly, I had to learn about stic site generators. Lastly I had to figure out a suitable setup for version control and pushing updates to the bluehost server I use.&lt;/p&gt;
 
 &lt;p&gt;Webdesign presents me with several challenges. The most prominent is that i’m not a designer. To overcome this challenge I decided to stick with simplicity. So, aside from the masking gimmick in the header I chose to implement a simple black and white theme. All the content lives in a single column. I tried to keep the extra fluff to a minimum. Expect more formatting and design updates as I gather feedback.&lt;/p&gt;
 
@@ -22,31 +22,35 @@
 
 &lt;p&gt;The next step was to automate the process of updating the web server whenever I made a change to the site. I will save the details of how I arrived at the following solution, I will merely say that I could not get jekyll to work on the server and leave it at that. The major point is that I now have two repositories for this website,one for Jekyll and the other for the site build. These are &lt;a href=&quot;https://github.com/ThermalSpan/web-ifThermal&quot;&gt;web-ifThermal&lt;/a&gt; and &lt;a href=&quot;https://github.com/ThermalSpan/web-ifThermal-site&quot;&gt;web-ifThermal-site&lt;/a&gt; respectivley. The webserver has a clone of the web-ifThermal-site repository. I created a soft-link from the repository to the public_html folder.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;rm -r -f ~/public_html
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rm -r -f ~/public_html
 ln -T ~/projects/web-ifThermal-site ~/public_html
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;Since I build the website locally, I wrote a pre-commit hook for the Jekyll repository that takes care of building and updating the site repository on both Gihub and the server. Here’s what it does:&lt;/p&gt;
 
 &lt;p&gt;1) It builds the site using:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;jekyll build -d ~/projects/web-ifThermal-site
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll build -d ~/projects/web-ifThermal-site
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;2) It then pushs the new site build to github.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;NOW=$(date +&quot;%H:%M-%b-%d-%Y&quot;)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NOW=$(date +&quot;%H:%M-%b-%d-%Y&quot;)
 git add -A
 git commit -m &quot;Site build - ${NOW}&quot;
 git push origin master
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;3) Lastly, It uses &lt;a href=&quot;http://sshpass.sourceforge.net&quot;&gt;sshpass&lt;/a&gt; and ssh to do a git pull on the server’s site repository. &lt;/p&gt;
+&lt;p&gt;3) Lastly, It uses &lt;a href=&quot;http://sshpass.sourceforge.net&quot;&gt;sshpass&lt;/a&gt; and ssh to do a git pull on the server’s site repository.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;source $HOME/ifthermal.cfg
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;source $HOME/ifthermal.cfg
 cmd=&quot;cd $HOME/projects/web-ifThermal-site; git pull;  exit;&quot;
 sshpass -p$password ssh ${sshuser}@${domain} $cmd
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;Now, in step three you may have noticed my use of source to collect sensitive information from a configuration file. It seems to be a debatable issue on best practices for calling secure information from a script. However, this file will be relativley safe on my machine so I’ll leave it that. If this solution rubs you the wrong way and you have a better solution PLEASE contact me. To be clear, the config file looks like this:
     #!/bin/bash
@@ -54,9 +58,9 @@ sshpass -p$password ssh ${sshuser}@${domain} $cmd
     domain=example.com
     password=12345&lt;/p&gt;
 
-&lt;p&gt;So now my workflow is fairly simple. I make changes to the site, update layouts, add a post, etc. When I’m ready I commit those changes, which will also update my site. So there it is, my current website setup. &lt;/p&gt;
+&lt;p&gt;So now my workflow is fairly simple. I make changes to the site, update layouts, add a post, etc. When I’m ready I commit those changes, which will also update my site. So there it is, my current website setup.&lt;/p&gt;
 
-&lt;p&gt;Here is a gist of the pre-commit script. Funny story, I was having trouble with gist and redid this one around ten times over the course of a couple minutes. ANNNND I got my account hidden for a while. Note: to use a the hook it must be in the the .git/hooks directory, and cannot have a file extension. &lt;/p&gt;
+&lt;p&gt;Here is a gist of the pre-commit script. Funny story, I was having trouble with gist and redid this one around ten times over the course of a couple minutes. ANNNND I got my account hidden for a while. Note: to use a the hook it must be in the the .git/hooks directory, and cannot have a file extension.&lt;/p&gt;
 
 &lt;script src=&quot;https://gist.github.com/ThermalSpan/2d82e99cca87be958b08.js&quot;&gt;&lt;/script&gt;
 
@@ -78,17 +82,17 @@ sshpass -p$password ssh ${sshuser}@${domain} $cmd
     
       <item>
         <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
 
 &lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Tom&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &amp;#39;Hi, Tom&amp;#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
 
@@ -110,13 +114,13 @@ sshpass -p$password ssh ${sshuser}@${domain} $cmd
 
 &lt;p&gt;This is a reboot of my old website. I have switched from a worpress site to a simple static site built with &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;This website marks a turning point in my programming adventure. I feel ready to put myself out there. Make a name. All that jazz. Here are some reasons explaing why I made this website. &lt;/p&gt;
+&lt;p&gt;This website marks a turning point in my programming adventure. I feel ready to put myself out there. Make a name. All that jazz. Here are some reasons explaing why I made this website.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Branding. I’m under the impression that a nice website with respectable client is more powerful than a simple resume. &lt;/li&gt;
-  &lt;li&gt;Output. Having a venue to share my work gives me the motivation to do it right and follow through. &lt;/li&gt;
+  &lt;li&gt;Branding. I’m under the impression that a nice website with respectable client is more powerful than a simple resume.&lt;/li&gt;
+  &lt;li&gt;Output. Having a venue to share my work gives me the motivation to do it right and follow through.&lt;/li&gt;
   &lt;li&gt;Work. This website gives a concrete foundation to built upon.&lt;/li&gt;
-  &lt;li&gt;Every one else. I have learned an absurd amount from the website of inspired individuals. I can only hope that I will add value to many online communities through my efforts here. &lt;/li&gt;
+  &lt;li&gt;Every one else. I have learned an absurd amount from the website of inspired individuals. I can only hope that I will add value to many online communities through my efforts here.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;So here it is! Welcome to &lt;em&gt;if(Thermal)&lt;/em&gt;.&lt;/p&gt;

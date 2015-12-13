@@ -36,7 +36,7 @@
 <div id="post">
 <h1 id="website-setup">Website Setup</h1>
 
-<p>Building this website presented a nice sequence of challenges for me. First, I still need to gain experience with the <em>html</em> and <em>css</em> combo. Secondly, I had to learn about stic site generators. Lastly I had to figure out a suitable setup for version control and pushing updates to the bluehost server I use. </p>
+<p>Building this website presented a nice sequence of challenges for me. First, I still need to gain experience with the <em>html</em> and <em>css</em> combo. Secondly, I had to learn about stic site generators. Lastly I had to figure out a suitable setup for version control and pushing updates to the bluehost server I use.</p>
 
 <p>Webdesign presents me with several challenges. The most prominent is that i’m not a designer. To overcome this challenge I decided to stick with simplicity. So, aside from the masking gimmick in the header I chose to implement a simple black and white theme. All the content lives in a single column. I tried to keep the extra fluff to a minimum. Expect more formatting and design updates as I gather feedback.</p>
 
@@ -44,31 +44,35 @@
 
 <p>The next step was to automate the process of updating the web server whenever I made a change to the site. I will save the details of how I arrived at the following solution, I will merely say that I could not get jekyll to work on the server and leave it at that. The major point is that I now have two repositories for this website,one for Jekyll and the other for the site build. These are <a href="https://github.com/ThermalSpan/web-ifThermal">web-ifThermal</a> and <a href="https://github.com/ThermalSpan/web-ifThermal-site">web-ifThermal-site</a> respectivley. The webserver has a clone of the web-ifThermal-site repository. I created a soft-link from the repository to the public_html folder.</p>
 
-<pre><code>rm -r -f ~/public_html
+<div class="highlighter-rouge"><pre class="highlight"><code>rm -r -f ~/public_html
 ln -T ~/projects/web-ifThermal-site ~/public_html
 </code></pre>
+</div>
 
 <p>Since I build the website locally, I wrote a pre-commit hook for the Jekyll repository that takes care of building and updating the site repository on both Gihub and the server. Here’s what it does:</p>
 
 <p>1) It builds the site using:</p>
 
-<pre><code>jekyll build -d ~/projects/web-ifThermal-site
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll build -d ~/projects/web-ifThermal-site
 </code></pre>
+</div>
 
 <p>2) It then pushs the new site build to github.</p>
 
-<pre><code>NOW=$(date +"%H:%M-%b-%d-%Y")
+<div class="highlighter-rouge"><pre class="highlight"><code>NOW=$(date +"%H:%M-%b-%d-%Y")
 git add -A
 git commit -m "Site build - ${NOW}"
 git push origin master
 </code></pre>
+</div>
 
-<p>3) Lastly, It uses <a href="http://sshpass.sourceforge.net">sshpass</a> and ssh to do a git pull on the server’s site repository. </p>
+<p>3) Lastly, It uses <a href="http://sshpass.sourceforge.net">sshpass</a> and ssh to do a git pull on the server’s site repository.</p>
 
-<pre><code>source $HOME/ifthermal.cfg
+<div class="highlighter-rouge"><pre class="highlight"><code>source $HOME/ifthermal.cfg
 cmd="cd $HOME/projects/web-ifThermal-site; git pull;  exit;"
 sshpass -p$password ssh ${sshuser}@${domain} $cmd
 </code></pre>
+</div>
 
 <p>Now, in step three you may have noticed my use of source to collect sensitive information from a configuration file. It seems to be a debatable issue on best practices for calling secure information from a script. However, this file will be relativley safe on my machine so I’ll leave it that. If this solution rubs you the wrong way and you have a better solution PLEASE contact me. To be clear, the config file looks like this:
     #!/bin/bash
@@ -76,9 +80,9 @@ sshpass -p$password ssh ${sshuser}@${domain} $cmd
     domain=example.com
     password=12345</p>
 
-<p>So now my workflow is fairly simple. I make changes to the site, update layouts, add a post, etc. When I’m ready I commit those changes, which will also update my site. So there it is, my current website setup. </p>
+<p>So now my workflow is fairly simple. I make changes to the site, update layouts, add a post, etc. When I’m ready I commit those changes, which will also update my site. So there it is, my current website setup.</p>
 
-<p>Here is a gist of the pre-commit script. Funny story, I was having trouble with gist and redid this one around ten times over the course of a couple minutes. ANNNND I got my account hidden for a while. Note: to use a the hook it must be in the the .git/hooks directory, and cannot have a file extension. </p>
+<p>Here is a gist of the pre-commit script. Funny story, I was having trouble with gist and redid this one around ten times over the course of a couple minutes. ANNNND I got my account hidden for a while. Note: to use a the hook it must be in the the .git/hooks directory, and cannot have a file extension.</p>
 
 <script src="https://gist.github.com/ThermalSpan/2d82e99cca87be958b08.js"></script>
 
